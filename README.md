@@ -5,9 +5,10 @@ ve složce frontend:
 
 ## **Backend**
 ve složce backend:
-sh gradlew
-sh gradlew bootRun
+1. `sh gradlew`
+1. `sh gradlew bootRun`
 
 ### Prerequisities
-apt install git default-jre mariadb-server
+On Debian-like server
+`apt install git default-jre mariadb-server`
 
