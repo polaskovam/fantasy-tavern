@@ -1,2 +1,6 @@
-package cz.tsuki.backend.security.models;public enum Role {
+package cz.tsuki.backend.security.models;
+
+public enum Role {
+    DRUNK,
+    BARTENDER
 }

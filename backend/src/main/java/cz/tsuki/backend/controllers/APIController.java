@@ -23,6 +23,4 @@ public class APIController {
     public ResponseEntity<?> menu() {
         return ResponseEntity.status(200).body(productService.getAll());
     }
-
-
 }
