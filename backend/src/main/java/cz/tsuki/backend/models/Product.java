@@ -18,6 +18,6 @@ public class Product {
     private String productName;
     private int productPrice;
     private boolean isForAdult;
-    private boolean isForRace;
+    private Race race;
     private String description;
 }
