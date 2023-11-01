@@ -1,11 +1,11 @@
-import React from "react";
+import React, {ReactElement} from "react";
+import LoginForm from "../components/LoginForm";
 
-function MainPage() {
+
+function MainPage(): ReactElement {
     return (
         <div>
-            <h1>Hello there!</h1>
-
-            <ul></ul>
+            <LoginForm />
         </div>
     );
 }
