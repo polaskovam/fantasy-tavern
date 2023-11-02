@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {Link} from "@mui/material";
+import Link from "@mui/material/Link";
 import ForgottenPassword from "../components/ForgottenPassword";
+
 
 interface DataT {
     username: string;
@@ -42,68 +42,66 @@ function LoginForm() {
         }));
     }
 
-
     return (
-        <Container component="main" maxWidth="xs">
-            <Box
-                sx={{
-                    mt: 10,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: "center",
-                    maxWidth: "xs",
-                }}>
-                <Typography component="h1" variant="h4">
-                    Sign in
-                </Typography>
-                <Box sx={{mt: 1}}>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
-                        onChange={handleChange}
-                        value={data.username}
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={handleChange}
-                        value={data.password}
-                    />
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        sx={{mt: 3, mb: 2}}
-                        onClick={handleSubmit}
-                    >
-                        Sign In
-                    </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link onClick={handleClickOpen} variant="body2" underline="hover" sx={{cursor: "pointer"}}>
-                                Forgot password?
-                            </Link>
-                            <ForgottenPassword open={open} onClose={handleClose}/>
-                        </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2" underline="hover">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
+        <Box
+            sx={{
+                mt: 10,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: "center",
+                maxWidth: "500px",
+            }}>
+            <Typography component="h1" variant="h4">
+                Sign in
+            </Typography>
+            <Box sx={{mt: 1}} component="form">
+                <TextField
+                    margin="dense"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    onChange={handleChange}
+                    value={data.username}
+                />
+                <TextField
+                    margin="dense"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={handleChange}
+                    value={data.password}
+                />
+                <Button
+                    fullWidth
+                    variant="contained"
+                    sx={{mt: 3, mb: 2}}
+                    onClick={handleSubmit}
+                >
+                    Sign In
+                </Button>
+                <Grid container>
+                    <Grid item xs>
+                        <Link onClick={handleClickOpen} variant="body2" underline="hover" sx={{cursor: "pointer"}}>
+                            Forgot password?
+                        </Link>
+                        <ForgottenPassword open={open} onClose={handleClose}/>
                     </Grid>
-                </Box>
+                    <Grid item>
+                        <Link href="#" variant="body2" underline="hover">
+                            {"Don't have an account? Sign Up"}
+                        </Link>
+                    </Grid>
+                </Grid>
+
             </Box>
-        </Container>
+        </Box>
     )
 }
 
