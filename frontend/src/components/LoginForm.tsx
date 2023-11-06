@@ -13,7 +13,11 @@ interface DataT {
     password: string;
 }
 
-function LoginForm() {
+interface LoginProps {
+    onReturn: () => void;
+    onRegistrationClick: () => void;
+}
+function LoginForm(props: LoginProps) {
 
     const [open, setOpen] = useState(false);
     const [data, setData] = useState<DataT>({username: "", password: ""});
@@ -86,7 +90,7 @@ function LoginForm() {
                 >
                     Sign In
                 </Button>
-                <Grid container>
+                <Grid container rowSpacing={7}>
                     <Grid item xs>
                         <Link onClick={handleClickOpen} variant="body2" underline="hover" sx={{cursor: "pointer"}}>
                             Forgot password?
@@ -94,8 +98,13 @@ function LoginForm() {
                         <ForgottenPassword open={open} onClose={handleClose}/>
                     </Grid>
                     <Grid item>
-                        <Link href="#" variant="body2" underline="hover">
-                            {"Don't have an account? Sign Up"}
+                        <Link href="#" variant="body2" underline="hover" onClick={props.onRegistrationClick}>
+                            Don't have an account? Sign Up
+                        </Link>
+                    </Grid>
+                    <Grid item xs={12}  textAlign="center">
+                        <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onReturn}>
+                            Back to Main page
                         </Link>
                     </Grid>
                 </Grid>

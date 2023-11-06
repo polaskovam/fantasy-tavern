@@ -6,8 +6,12 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 
+interface RegistrationProps {
+    onReturn: () => void;
+    onLoginClick: () => void;
+}
 
-function RegistrationForm() {
+function RegistrationForm(props: RegistrationProps) {
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
     }
@@ -63,8 +67,13 @@ function RegistrationForm() {
                 </Button>
                 <Grid container>
                     <Grid item xs>
-                        <Link variant="body2" underline="hover" sx={{cursor: "pointer"}}>
+                        <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onReturn}>
                             Back to Main page
+                        </Link>
+                    </Grid>
+                    <Grid item >
+                        <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onLoginClick}>
+                            Already have an account? Sign in
                         </Link>
                     </Grid>
                 </Grid>

@@ -5,7 +5,12 @@ import {Paper} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-function WelcomePage(): ReactElement {
+interface IntroductionProps {
+    onLoginClick: () => void;
+    onRegistrationClick: () => void;
+}
+
+function Introduction(props: IntroductionProps): ReactElement {
     return (
         <Grid item xs={12} mt={5}>
             <Paper elevation={24}>
@@ -42,10 +47,10 @@ function WelcomePage(): ReactElement {
                     </Typography>
                     <Grid container mt={5} textAlign="center" justifyContent="center">
                         <Grid item xs={12} md={4}>
-                            <Button size="large" variant="text">Sign In</Button>
+                            <Button size="large" variant="text" onClick={props.onLoginClick}>Sign In</Button>
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <Button size="large" variant="text">Don't have an account? Sign Up</Button>
+                            <Button size="large" variant="text" onClick={props.onRegistrationClick}>Don't have an account? Sign Up</Button>
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Button size="large" variant="text">Visit without registration</Button>
@@ -57,4 +62,4 @@ function WelcomePage(): ReactElement {
     )
 }
 
-export default WelcomePage;
+export default Introduction;
