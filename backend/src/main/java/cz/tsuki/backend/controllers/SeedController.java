@@ -18,7 +18,7 @@ public class SeedController {
 
     private ProductService productService;
 
-    @GetMapping("/seed")
+    @GetMapping("/drinks")
     public ResponseEntity<?> createDrinks() {
 
         Product drink1 = new Product();
