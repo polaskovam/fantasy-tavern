@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
     @Id
     @GeneratedValue
-    private Long orderItemId;
+    private Long id;
 
     @ManyToOne
     private Order order;

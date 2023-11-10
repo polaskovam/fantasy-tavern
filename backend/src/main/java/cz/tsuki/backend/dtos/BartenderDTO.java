@@ -1,7 +1,6 @@
 package cz.tsuki.backend.dtos;
 
 import cz.tsuki.backend.models.Race;
-import cz.tsuki.backend.security.models.Role;
 import cz.tsuki.backend.security.models.User;
 import lombok.Data;
 
@@ -17,7 +16,7 @@ public class BartenderDTO {
     //private List<Drunk> drunks;
 
     public BartenderDTO(User user) {
-        this.userId = user.getUserId();
+        this.userId = user.getId();
         this.username = user.getUsername();
         this.race = user.getRace();
         this.wallet = user.getWallet();

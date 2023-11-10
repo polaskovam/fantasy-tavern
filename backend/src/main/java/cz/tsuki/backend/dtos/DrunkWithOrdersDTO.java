@@ -19,7 +19,7 @@ public class DrunkWithOrdersDTO {
     private UserService userService;
 
     public DrunkWithOrdersDTO(User user) {
-        this.drunkId = user.getUserId();
+        this.drunkId = user.getId();
         this.username = user.getUsername();
         this.isAdult = user.canBuyBooze();
         this.wallet = user.getWallet();

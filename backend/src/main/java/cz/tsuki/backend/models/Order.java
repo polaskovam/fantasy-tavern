@@ -12,15 +12,16 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue
-    private Long orderId;
+    private Long id;
 
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> items;
     private int totalPrice;
 
