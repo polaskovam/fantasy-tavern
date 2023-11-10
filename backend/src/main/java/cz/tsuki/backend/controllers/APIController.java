@@ -2,6 +2,7 @@ package cz.tsuki.backend.controllers;
 
 import cz.tsuki.backend.dtos.BartenderDTO;
 import cz.tsuki.backend.dtos.DrunkWithOrdersDTO;
+import cz.tsuki.backend.globalExceptionHandler.UserNotFoundException;
 import cz.tsuki.backend.security.models.User;
 import cz.tsuki.backend.security.services.UserService;
 import cz.tsuki.backend.services.ProductService;
@@ -44,8 +45,10 @@ public class APIController {
         } else if (maybeUser.isPresent()) {
             return ResponseEntity.status(200).body(new DrunkWithOrdersDTO(maybeUser.get()));
         } else {
-            return ResponseEntity.status(404).body("User does not exist.");
+            throw new UserNotFoundException(id);
         }
     }
+
+
 
 }
