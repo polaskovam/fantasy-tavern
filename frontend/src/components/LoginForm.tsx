@@ -49,7 +49,7 @@ function LoginForm(props: LoginProps) {
     return (
         <Box
             sx={{
-                mt: 10,
+                mt: 8,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: "center",
@@ -98,7 +98,7 @@ function LoginForm(props: LoginProps) {
                         <ForgottenPassword open={open} onClose={handleClose}/>
                     </Grid>
                     <Grid item>
-                        <Link href="#" variant="body2" underline="hover" onClick={props.onRegistrationClick}>
+                        <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onRegistrationClick}>
                             Don't have an account? Sign Up
                         </Link>
                     </Grid>

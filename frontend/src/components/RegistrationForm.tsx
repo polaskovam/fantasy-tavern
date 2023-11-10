@@ -1,24 +1,69 @@
-import React from "react";
+import React, {useState} from "react";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
+import AvatarButton from "./AvatarButton";
 
 interface RegistrationProps {
     onReturn: () => void;
     onLoginClick: () => void;
 }
 
+const buttons = [
+    {
+        name: "human",
+        label: "Human",
+        image: "/images/human.png",
+    },
+    {
+        name: "orc",
+        label: "Orc",
+        image: "/images/orc.png",
+    },
+    {
+        name: "elf",
+        label: "Elf",
+        image: "/images/elf.png",
+    },
+    {
+        name: "goblin",
+        label: "Goblin",
+        image: "/images/goblin.png",
+    },
+    {
+        name: "undead",
+        label: "Undead",
+        image: "/images/undead.png",
+    },
+];
+
+
 function RegistrationForm(props: RegistrationProps) {
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
     }
+
+    const [selectedRace, setSelectedRace] = useState<string | null>(null);
+
+    const [selectedRole, setSelectedRole] = useState<string>("drunk");
+
+
+    const handleSelect = (name: string, type?: string) => {
+        if (type === 'race') {
+            setSelectedRace(name);
+        } else {
+            setSelectedRole(name);
+        }
+    }
+
+
     return (
         <Box
             sx={{
-                mt: 10,
+                mt: 3,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: "center",
@@ -27,6 +72,34 @@ function RegistrationForm(props: RegistrationProps) {
             <Typography component="h1" variant="h4">
                 Registration form
             </Typography>
+            <Grid container textAlign="center" justifyContent="center" sx={{mt: 2}} columnSpacing={1}>
+                <Grid item xs={12}>
+                    <Typography>
+                        My character will be:
+                    </Typography>
+                </Grid>
+                <AvatarButton
+                    name="drunk"
+                    src="/images/drunk.png"
+                    handleClick={() => handleSelect("drunk")}
+                    isSelected={selectedRole === "drunk"}
+                />
+                <AvatarButton
+                    name="bartender"
+                    src="/images/bartender.png"
+                    handleClick={() => handleSelect("bartender")}
+                    isSelected={selectedRole === "bartender"}
+                />
+                <Grid item xs={12} pb={1} pt={1}>
+                    <Typography>
+                        My character's race will be:
+                    </Typography>
+                </Grid>
+                {buttons.map((button) => (
+                    <AvatarButton key={button.name} name={button.label} src={button.image}
+                                  handleClick={() => handleSelect(button.name, "race")} isSelected={selectedRace === button.name}/>
+                ))}
+            </Grid>
             <Box sx={{mt: 1}}>
                 <TextField
                     margin="normal"
@@ -71,7 +144,7 @@ function RegistrationForm(props: RegistrationProps) {
                             Back to Main page
                         </Link>
                     </Grid>
-                    <Grid item >
+                    <Grid item>
                         <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onLoginClick}>
                             Already have an account? Sign in
                         </Link>
