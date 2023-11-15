@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import AvatarButton from "./AvatarButton";
+import SelectYear from "./SelectYear";
 
 interface RegistrationProps {
     onReturn: () => void;
@@ -72,7 +73,7 @@ function RegistrationForm(props: RegistrationProps) {
             <Typography component="h1" variant="h4">
                 Registration form
             </Typography>
-            <Grid container textAlign="center" justifyContent="center" sx={{mt: 2}} columnSpacing={1}>
+            <Grid container textAlign="center" justifyContent="center" alignItems="center" sx={{mt: 2}} columnSpacing={1}>
                 <Grid item xs={12}>
                     <Typography>
                         My character will be:
@@ -90,6 +91,7 @@ function RegistrationForm(props: RegistrationProps) {
                     handleClick={() => handleSelect("bartender")}
                     isSelected={selectedRole === "bartender"}
                 />
+                <SelectYear />
                 <Grid item xs={12} pb={1} pt={1}>
                     <Typography>
                         My character's race will be:
