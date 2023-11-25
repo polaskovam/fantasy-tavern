@@ -50,9 +50,7 @@ function Account() {
                         }}
                     />
                 </ListItem>
-
             </List>
-
         </Card>
     )
 }
