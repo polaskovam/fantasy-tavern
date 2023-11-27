@@ -22,26 +22,26 @@ function Drink() {
 
 
     return (
-        <Grid item sx={{mt:10, ml:10}}>
-            <Card sx={{width: 170}}>
-                <CardContent sx={{px:2, pt: 1, pb: "0 !important"}}>
-                    <Typography variant="body2" sx={{fontSize: 14, color: "red", pb: 1}} mt={0} align="right" gutterBottom>
+        <Grid item xs={4} sx={{mb: 1}}>
+            <Card sx={{width: 120, mx: "auto"}}>
+                <CardContent sx={{px: 2, pt: 1, pb: "0 !important"}}>
+                    <Typography variant="body2" sx={{fontSize: 14, color: "red", pb: 0, mt: 0}} align="right" gutterBottom>
                         Alcoholic
                     </Typography>
                     <CardMedia
-                        sx={{ height: 138, width: 138, justifyContent: "center"}}
+                        sx={{ height: 88, width: 88, justifyContent: "center"}}
                         image="/images/margarita.jpg"
                         title="margarita"
                     />
                     <Typography variant="h6" mt={1} align="center">
                         Margarita
                     </Typography>
-                    <Box display="flex" alignItems="center" justifyContent="center" sx={{mt:1, pb: 1}}>
-                        <IconButton aria-label="subtract" sx={{mr:1}} color="error" onClick={handleDecrease}>
+                    <Box display="flex" alignItems="center" justifyContent="center" sx={{pb: 1}}>
+                        <IconButton aria-label="subtract" sx={{mr: 1}} color="error" onClick={handleDecrease}>
                             <RemoveIcon />
                         </IconButton>
-                        <Typography variant="h5">{count}</Typography>
-                        <IconButton aria-label="add" sx={{ml:1}} color="success" onClick={handleIncrease}>
+                        <Typography variant="h6">{count}</Typography>
+                        <IconButton aria-label="add" sx={{ml: 1}} color="success" onClick={handleIncrease}>
                             <AddIcon />
                         </IconButton>
                     </Box>

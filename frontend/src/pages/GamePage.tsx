@@ -3,13 +3,13 @@ import Container from "@mui/material/Container";
 import Navbar from "../components/game components/Navbar";
 import Box from "@mui/material/Box";
 import Account from "../components/game components/Account";
-import Drink from "../components/game components/Drink";
+import Menu from "../components/game components/Menu";
 function GamePage() {
     return (
         <Box>
             <Navbar />
             <Account />
-            <Drink />
+            <Menu />
 
 
         </Box>
