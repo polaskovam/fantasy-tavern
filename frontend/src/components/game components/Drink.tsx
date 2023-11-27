@@ -9,18 +9,14 @@ import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-function Drink() {
-     const [count, setCount] = useState(0);
+interface TDrinkProps {
+    onIncrease: (name: string) => void,
+    onDecrease: (name: string) => void,
+    name: string,
+    count: number,
+}
 
-     const handleIncrease = () => {
-         setCount((prevCount) => prevCount + 1);
-     };
-
-     const handleDecrease = () => {
-         setCount((prevCount) => (prevCount === 0 ? 0 : prevCount - 1));
-     };
-
-
+function Drink({onIncrease, onDecrease, name, count}: TDrinkProps) {
     return (
         <Grid item xs={4} sx={{mb: 1}}>
             <Card sx={{width: 120, mx: "auto"}}>
@@ -34,14 +30,14 @@ function Drink() {
                         title="margarita"
                     />
                     <Typography variant="h6" mt={1} align="center">
-                        Margarita
+                        {name[0].toUpperCase()+name.slice(1)}
                     </Typography>
                     <Box display="flex" alignItems="center" justifyContent="center" sx={{pb: 1}}>
-                        <IconButton aria-label="subtract" sx={{mr: 1}} color="error" onClick={handleDecrease}>
+                        <IconButton aria-label="subtract" sx={{mr: 1}} color="error" onClick={() => onDecrease(name)}>
                             <RemoveIcon />
                         </IconButton>
                         <Typography variant="h6">{count}</Typography>
-                        <IconButton aria-label="add" sx={{ml: 1}} color="success" onClick={handleIncrease}>
+                        <IconButton aria-label="add" sx={{ml: 1}} color="success" onClick={() => onIncrease(name)}>
                             <AddIcon />
                         </IconButton>
                     </Box>
