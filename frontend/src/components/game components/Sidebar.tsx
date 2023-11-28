@@ -16,10 +16,10 @@ import Tooltip from '@mui/material/Tooltip';
 const drawerWidth = 65;
 
 interface SideBarProps {
-
+    onHandleOpen: () => void,
 };
 
-function Sidebar(props: SideBarProps) {
+function Sidebar({onHandleOpen}: SideBarProps) {
     return (
         <Drawer
             variant="permanent"
@@ -33,7 +33,6 @@ function Sidebar(props: SideBarProps) {
                     sx: {backgroundColor: 'green'}
                 }
             }
-
         >
             <Toolbar/>
             <Box sx={{overflowX: 'hidden'}}>
@@ -45,7 +44,7 @@ function Sidebar(props: SideBarProps) {
                             </ListItemIcon>
                         </Tooltip>
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={onHandleOpen}>
                         <Tooltip title={<span style={{fontSize: 14}}>Menu</span>} placement="right" arrow>
                             <ListItemIcon sx={{mt: 3}}>
                                 <MenuBookIcon fontSize="large" sx={{color: 'white'}}/>
@@ -54,14 +53,13 @@ function Sidebar(props: SideBarProps) {
                     </ListItem>
                     <ListItem button>
                         <Tooltip title={<span style={{fontSize: 14}}>Guessing game</span>} placement="right" arrow>
-                        <ListItemIcon sx={{mt: 3}}>
-                            <QuestionMarkIcon fontSize="large" sx={{color: 'white'}}/>
-                        </ListItemIcon>
-                    </Tooltip>
+                            <ListItemIcon sx={{mt: 3}}>
+                                <QuestionMarkIcon fontSize="large" sx={{color: 'white'}}/>
+                            </ListItemIcon>
+                        </Tooltip>
                     </ListItem>
                 </List>
             </Box>
-
         </Drawer>
     )
 }

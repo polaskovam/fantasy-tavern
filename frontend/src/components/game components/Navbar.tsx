@@ -5,9 +5,11 @@ import Container from "@mui/material/Container";
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 import Sidebar from "./Sidebar";
+interface NavProps {
+    onHandleOpen: () => void,
+}
 
-
-function Navbar() {
+function Navbar({onHandleOpen}: NavProps) {
     return (
         <>
             <AppBar position="fixed" sx={{backgroundColor: 'black',  zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -23,7 +25,7 @@ function Navbar() {
                     </Toolbar>
                 </Box>
             </AppBar>
-            <Sidebar/>
+            <Sidebar onHandleOpen={onHandleOpen}/>
         </>
     )
 }
