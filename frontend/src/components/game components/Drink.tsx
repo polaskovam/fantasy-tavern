@@ -8,6 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 interface TDrinkProps {
     onIncrease: (name: string) => void,
@@ -29,8 +30,11 @@ function Drink({onIncrease, onDecrease, name, count}: TDrinkProps) {
                         image="/images/margarita.jpg"
                         title="margarita"
                     />
-                    <Typography variant="h6" mt={1} align="center">
+                    <Typography variant="h6" mt={1} align="center" fontWeight="bold">
                         {name[0].toUpperCase()+name.slice(1)}
+                    </Typography>
+                    <Typography align="center">
+                        150 coins
                     </Typography>
                     <Box display="flex" alignItems="center" justifyContent="center" sx={{pb: 1}}>
                         <IconButton aria-label="subtract" sx={{mr: 1}} color="error" onClick={() => onDecrease(name)}>

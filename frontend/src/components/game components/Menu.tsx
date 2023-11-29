@@ -44,12 +44,12 @@ function Menu({onHandleOpen}: MenuProps) {
                 </IconButton>
             </DialogActions>
             <DialogTitle sx={{pt: 0}}>
-                <Typography variant="h4" sx={{textAlign: "center", mb: 1, pt: 0}}>
+                <Typography variant="h4" sx={{textAlign: "center", mb: 0, pt: 0}}>
                     Menu
                 </Typography>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{overflowY: 'auto', height: 438, width: '100%', justifyContent: 'center'}}>
+                <Box sx={{overflowY: 'auto', height: 488, width: '100%', justifyContent: 'center'}}>
                     <Grid container>
                         <Drink name="margarita" count={count.margarita} onIncrease={handleIncrease}
                                onDecrease={handleDecrease}/>

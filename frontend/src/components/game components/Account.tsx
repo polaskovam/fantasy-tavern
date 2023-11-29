@@ -13,7 +13,7 @@ function Account() {
                     2000
                 </Typography>
                 <Typography>
-                    Money Balance
+                    coins
                 </Typography>
             </Paper>
             <List style={{height: 180, overflowY: 'auto'}}>

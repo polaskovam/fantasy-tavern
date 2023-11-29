@@ -34,7 +34,7 @@ function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }
     }
 
     return (
-        <React.Fragment>
+        <>
             <Dialog open={props.open} onClose={props.onClose}>
                 <DialogTitle>Restore forgotten password</DialogTitle>
                 <DialogContent>
@@ -70,7 +70,7 @@ function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }
                     <Button onClick={handleSubmit}>Send</Button>
                 </DialogActions>
             </Dialog>
-        </React.Fragment>
+        </>
     );
 }
 
