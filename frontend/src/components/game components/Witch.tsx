@@ -13,11 +13,15 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 
-function Witch() {
+interface WitchProps {
+    onHandleWitchOpen: () => void
+}
+
+function Witch({onHandleWitchOpen}: WitchProps) {
     return (
         <Dialog open>
             <DialogActions sx={{p: 0}}>
-                <IconButton>
+                <IconButton onClick={onHandleWitchOpen}>
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>

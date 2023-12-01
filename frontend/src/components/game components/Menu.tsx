@@ -16,9 +16,9 @@ interface CountT {
 }
 
 interface MenuProps {
-    onHandleOpen: () => void,
+    onHandleMenuOpen: () => void,
 }
-function Menu({onHandleOpen}: MenuProps) {
+function Menu({onHandleMenuOpen}: MenuProps) {
     const [count, setCount] = useState<CountT>({
         margarita: 0,
         vodka: 0,
@@ -39,7 +39,7 @@ function Menu({onHandleOpen}: MenuProps) {
     return (
         <Dialog open>
             <DialogActions sx={{p: 0}}>
-                <IconButton onClick={onHandleOpen}>
+                <IconButton onClick={onHandleMenuOpen}>
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>

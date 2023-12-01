@@ -4,20 +4,26 @@ import Box from "@mui/material/Box";
 import Account from "../components/game components/Account";
 import Menu from "../components/game components/Menu";
 import Witch from "../components/game components/Witch";
-function GamePage() {
-    const[isOpen, setIsOpen] = useState(false);
 
-    function handleOpen() {
-        setIsOpen(prevState => !prevState)
+function GamePage() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isWitchOpen, setIsWitchOpen] = useState(false);
+
+    function handleMenuOpen() {
+        setIsMenuOpen(prevState => !prevState)
     }
 
+    function handleWitchOpen() {
+        setIsWitchOpen(prevState => !prevState)
+    }
 
     return (
         <Box>
-            <Navbar onHandleOpen={handleOpen} />
-            <Account />
-            {isOpen && <Menu onHandleOpen={handleOpen}/>}
-            <Witch />
+            <Navbar onHandleMenuOpen={handleMenuOpen} onHandleWitchOpen={handleWitchOpen}/>
+            <Account/>
+            {isMenuOpen && <Menu onHandleMenuOpen={handleMenuOpen}/>}
+            {isWitchOpen && <Witch onHandleWitchOpen={handleWitchOpen} />}
+
 
         </Box>
     )
