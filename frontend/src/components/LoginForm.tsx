@@ -90,7 +90,7 @@ function LoginForm(props: LoginProps) {
                 >
                     Sign In
                 </Button>
-                <Grid container rowSpacing={7}>
+                <Grid container rowSpacing={6}>
                     <Grid item xs>
                         <Link onClick={handleClickOpen} variant="body2" underline="hover" sx={{cursor: "pointer"}}>
                             Forgot password?

@@ -25,7 +25,7 @@ function SelectYear() {
     };
 
     return (
-        <Grid item ml={8}>
+        <Grid item >
             <FormControl required>
                 <InputLabel id="select-label">Year of birth</InputLabel>
                 <Select
