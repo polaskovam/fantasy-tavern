@@ -6,7 +6,14 @@ import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import AvatarButton from "./AvatarButton";
-import SelectYear from "./SelectYear";
+
+interface RegDataT {
+    username: string,
+    password: string,
+    passwordCheck: string,
+    email: string,
+    age: number,
+}
 
 interface RegistrationProps {
     onReturn: () => void;
@@ -43,9 +50,6 @@ const buttons = [
 
 
 function RegistrationForm(props: RegistrationProps) {
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-    }
     // State
 
     const [selectedRace, setSelectedRace] = useState<string | null>(null);
@@ -54,6 +58,13 @@ function RegistrationForm(props: RegistrationProps) {
 
     const [isFirstVisible, setIsFirstVisible] = useState(true);
 
+    const [regData, setRegData] = useState<RegDataT>({
+        username: "",
+        password: "",
+        passwordCheck: "",
+        email: "",
+        age: 0,
+    });
 
     //Functions
     const handleSelect = (name: string, type?: string) => {
@@ -69,20 +80,54 @@ function RegistrationForm(props: RegistrationProps) {
     }
 
 
+    // Rest of a form
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        e.preventDefault();
+        const {name, value} = e.target;
+
+        setRegData((prevData: RegDataT) => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+
+    function handleRegData(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+
+        const formData = {
+            regData,
+            selectedRace,
+            selectedRole
+        }
+
+        console.log(formData);
+
+        setRegData(({
+            username: "",
+            password: "",
+            passwordCheck: "",
+            email: "",
+            age: 0,
+        }));
+
+        setSelectedRace(null);
+        setSelectedRole("drunk");
+    }
+
+
     return (
         <Box
-             sx={{
-                 mt: 3,
-                 display: 'flex',
-                 flexDirection: 'column',
-                 alignItems: "center",
-                 maxWidth: "500px",
-             }}>
+            sx={{
+                mt: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: "center",
+                maxWidth: "500px",
+            }}>
             <Typography component="h1" variant="h4">
                 Registration form
             </Typography>
             <Box sx={{mt: 1}}>
-
                 {isFirstVisible ? (
                     <>
                         <TextField
@@ -92,7 +137,9 @@ function RegistrationForm(props: RegistrationProps) {
                             id="username"
                             label="Username"
                             name="username"
+                            value={regData.username}
                             autoComplete="username"
+                            onChange={handleChange}
                         />
                         <TextField
                             margin="normal"
@@ -102,15 +149,19 @@ function RegistrationForm(props: RegistrationProps) {
                             label="Password"
                             type="password"
                             id="password"
+                            value={regData.password}
+                            onChange={handleChange}
                         />
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            name="password check"
-                            label="Password check"
+                            name="passwordCheck"
+                            label="PasswordCheck"
                             type="password"
-                            id="password check"
+                            id="passwordCheck"
+                            value={regData.passwordCheck}
+                            onChange={handleChange}
                         />
                         <TextField
                             margin="normal"
@@ -121,6 +172,8 @@ function RegistrationForm(props: RegistrationProps) {
                             type="email"
                             id="email"
                             autoComplete="email"
+                            value={regData.email}
+                            onChange={handleChange}
                         />
                         <Button
                             fullWidth
@@ -145,9 +198,11 @@ function RegistrationForm(props: RegistrationProps) {
                                 label="Character's Age"
                                 type="number"
                                 id="age"
+                                onChange={handleChange}
+                                value={regData.age}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} mt={3}>
                             <Typography>
                                 My character will be:
                             </Typography>
@@ -157,14 +212,16 @@ function RegistrationForm(props: RegistrationProps) {
                             src="/images/drunk.png"
                             handleClick={() => handleSelect("drunk")}
                             isSelected={selectedRole === "drunk"}
+
                         />
                         <AvatarButton
                             name="bartender"
                             src="/images/bartender.png"
                             handleClick={() => handleSelect("bartender")}
                             isSelected={selectedRole === "bartender"}
+
                         />
-                        <Grid item xs={12} pb={1} pt={1}>
+                        <Grid item xs={12} pb={1} pt={1} mt={3}>
                             <Typography>
                                 My character's race will be:
                             </Typography>
@@ -172,12 +229,14 @@ function RegistrationForm(props: RegistrationProps) {
                         {buttons.map((button) => (
                             <AvatarButton key={button.name} name={button.label} src={button.image}
                                           handleClick={() => handleSelect(button.name, "race")}
-                                          isSelected={selectedRace === button.name}/>
+                                          isSelected={selectedRace === button.name}
+                            />
                         ))}
                         <Button
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
+                            onClick={handleRegData}
                         >
                             Sign Up
                         </Button>
