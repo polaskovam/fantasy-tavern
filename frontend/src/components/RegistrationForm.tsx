@@ -63,7 +63,7 @@ function RegistrationForm(props: RegistrationProps) {
         password: "",
         passwordCheck: "",
         email: "",
-        age: 0,
+        age: 30,
     });
 
     //Functions
@@ -91,11 +91,26 @@ function RegistrationForm(props: RegistrationProps) {
         }));
     }
 
+    function checkAge(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        let age: number = Number(e.target.value);
+
+        if (age <= 0) {
+            age = 1;
+        } else if(age > 10000) {
+            age = 10000;
+        }
+
+        setRegData((prevData: RegDataT) => ({
+            ...prevData,
+            age: age,
+        }));
+    }
+
     function handleRegData(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
 
         const formData = {
-            regData,
+            ...regData,
             selectedRace,
             selectedRole
         }
@@ -157,7 +172,7 @@ function RegistrationForm(props: RegistrationProps) {
                             required
                             fullWidth
                             name="passwordCheck"
-                            label="PasswordCheck"
+                            label="Password Check"
                             type="password"
                             id="passwordCheck"
                             value={regData.passwordCheck}
@@ -189,7 +204,7 @@ function RegistrationForm(props: RegistrationProps) {
                           columnSpacing={1}>
                         <Grid item xs={12}>
                             <Typography>
-                                Charater's age:
+                                Character's age:
                             </Typography>
                             <TextField
                                 sx={{width: 160}}
@@ -200,6 +215,7 @@ function RegistrationForm(props: RegistrationProps) {
                                 id="age"
                                 onChange={handleChange}
                                 value={regData.age}
+                                onBlur={checkAge}
                             />
                         </Grid>
                         <Grid item xs={12} mt={3}>
@@ -212,15 +228,13 @@ function RegistrationForm(props: RegistrationProps) {
                             src="/images/drunk.png"
                             handleClick={() => handleSelect("drunk")}
                             isSelected={selectedRole === "drunk"}
-
                         />
-                        <AvatarButton
-                            name="bartender"
-                            src="/images/bartender.png"
-                            handleClick={() => handleSelect("bartender")}
-                            isSelected={selectedRole === "bartender"}
-
-                        />
+                        {/*<AvatarButton*/}
+                        {/*    name="bartender"*/}
+                        {/*    src="/images/bartender.png"*/}
+                        {/*    handleClick={() => handleSelect("bartender")}*/}
+                        {/*    isSelected={selectedRole === "bartender"}*/}
+                        {/*/>*/}
                         <Grid item xs={12} pb={1} pt={1} mt={3}>
                             <Typography>
                                 My character's race will be:
@@ -244,7 +258,7 @@ function RegistrationForm(props: RegistrationProps) {
                 )}
 
                 <Grid container rowSpacing={6}>
-                    {isFirstVisible === false ? (<Grid item xs>
+                    {!isFirstVisible ? (<Grid item xs>
                         <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={nextPart}>
                             Back to first step
                         </Link>

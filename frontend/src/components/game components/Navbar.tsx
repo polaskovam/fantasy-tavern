@@ -20,7 +20,7 @@ function Navbar({onHandleMenuOpen, onHandleWitchOpen}: NavProps) {
                             Fantasy tavern
                         </Typography>
                         <Typography variant="h6" sx={{flexGrow: 1.3, justifyContent: 'center'}}>
-                            (name of current room)
+                            {/*(name of current room)*/}
                         </Typography>
                         <Button color="inherit">Log out</Button>
                     </Toolbar>

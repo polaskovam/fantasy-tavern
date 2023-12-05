@@ -36,7 +36,7 @@ function Sidebar({onHandleMenuOpen, onHandleWitchOpen}: SideBarProps) {
             <Toolbar/>
             <Box sx={{overflowX: 'hidden'}}>
                 <List>
-                    <ListItemButton>
+                    <ListItemButton disabled>
                         <Tooltip title={<span style={{fontSize: 14}}>Rooms</span>} placement="right" arrow>
                             <ListItemIcon sx={{mt: 2}}>
                                 <MeetingRoomIcon fontSize="large" sx={{color: 'white'}}/>
@@ -50,7 +50,7 @@ function Sidebar({onHandleMenuOpen, onHandleWitchOpen}: SideBarProps) {
                             </ListItemIcon>
                         </Tooltip>
                     </ListItemButton>
-                    <ListItemButton>
+                    <ListItemButton disabled>
                         <Tooltip title={<span style={{fontSize: 14}}>Guessing game</span>} placement="right" arrow>
                             <ListItemIcon sx={{mt: 3}} onClick={onHandleWitchOpen}>
                                 <QuestionMarkIcon fontSize="large" sx={{color: 'white'}}/>
