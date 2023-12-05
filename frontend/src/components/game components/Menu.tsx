@@ -18,6 +18,7 @@ interface CountT {
 interface MenuProps {
     onHandleMenuOpen: () => void,
 }
+
 function Menu({onHandleMenuOpen}: MenuProps) {
     const [count, setCount] = useState<CountT>({
         margarita: 0,
@@ -36,6 +37,11 @@ function Menu({onHandleMenuOpen}: MenuProps) {
         }))
     };
 
+    function handleBuy() {
+        console.log(count)
+    }
+
+
     return (
         <Dialog open>
             <DialogActions sx={{p: 0}}>
@@ -43,10 +49,8 @@ function Menu({onHandleMenuOpen}: MenuProps) {
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>
-            <DialogTitle sx={{pt: 0}}>
-                <Typography variant="h4" sx={{textAlign: "center", mb: 0, pt: 0}}>
-                    Menu
-                </Typography>
+            <DialogTitle sx={{pt: 0, textAlign: "center", mb: 0}} typography={"h4"}>
+                Menu
             </DialogTitle>
             <DialogContent>
                 <Box sx={{overflowY: 'auto', height: 488, width: '100%', justifyContent: 'center'}}>
@@ -62,7 +66,7 @@ function Menu({onHandleMenuOpen}: MenuProps) {
                 </Box>
             </DialogContent>
             <DialogActions sx={{justifyContent: "center"}}>
-                <Button type="submit" variant="contained" size="large">
+                <Button type="submit" variant="contained" size="large" onClick={handleBuy}>
                     Buy
                 </Button>
             </DialogActions>

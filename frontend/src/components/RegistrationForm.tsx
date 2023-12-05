@@ -52,7 +52,7 @@ const buttons = [
 function RegistrationForm(props: RegistrationProps) {
     // State
 
-    const [selectedRace, setSelectedRace] = useState<string | null>(null);
+    const [selectedRace, setSelectedRace] = useState<string | null>("human");
 
     const [selectedRole, setSelectedRole] = useState<string>("drunk");
 
@@ -96,7 +96,7 @@ function RegistrationForm(props: RegistrationProps) {
 
         if (age <= 0) {
             age = 1;
-        } else if(age > 10000) {
+        } else if (age > 10000) {
             age = 10000;
         }
 
@@ -125,10 +125,15 @@ function RegistrationForm(props: RegistrationProps) {
             age: 0,
         }));
 
-        setSelectedRace(null);
+        setSelectedRace("human");
         setSelectedRole("drunk");
     }
 
+    const checkPassword = regData.password === regData.passwordCheck;
+
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(regData.email);
+
+    const isFormValid = regData.username.trim() !== "" && checkPassword && isEmailValid && regData.email !== '';
 
     return (
         <Box
@@ -171,6 +176,8 @@ function RegistrationForm(props: RegistrationProps) {
                             margin="normal"
                             required
                             fullWidth
+                            error={!checkPassword}
+                            helperText={!checkPassword ? 'Passwords do not match!' : ''}
                             name="passwordCheck"
                             label="Password Check"
                             type="password"
@@ -182,6 +189,8 @@ function RegistrationForm(props: RegistrationProps) {
                             margin="normal"
                             required
                             fullWidth
+                            error={!isEmailValid  && regData.email !== ''}
+                            helperText={!isEmailValid && regData.email !== '' ? "Invalid email format!" : ""}
                             name="email"
                             label="Email address"
                             type="email"
@@ -195,6 +204,7 @@ function RegistrationForm(props: RegistrationProps) {
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
                             onClick={nextPart}
+                            disabled={!isFormValid}
                         >
                             Next
                         </Button>
@@ -256,13 +266,14 @@ function RegistrationForm(props: RegistrationProps) {
                         </Button>
                     </Grid>
                 )}
-
                 <Grid container rowSpacing={6}>
-                    {!isFirstVisible ? (<Grid item xs>
-                        <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={nextPart}>
-                            Back to first step
-                        </Link>
-                    </Grid>) : ""}
+                    {!isFirstVisible ? (
+                        <Grid item xs>
+                            <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={nextPart}>
+                                Back to first step
+                            </Link>
+                        </Grid>
+                    ) : ""}
                     <Grid item xs textAlign="right">
                         <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onLoginClick}>
                             Already have an account? Sign in

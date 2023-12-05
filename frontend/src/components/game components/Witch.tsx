@@ -25,10 +25,8 @@ function Witch({onHandleWitchOpen}: WitchProps) {
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>
-            <DialogTitle sx={{pt: 0}}>
-                <Typography variant="h5" sx={{textAlign: "center", mb: 0, pt: 0}}>
+            <DialogTitle sx={{pt: 0, textAlign: "center", mb: 0}} typography={"h5"}>
                     Guessing game
-                </Typography>
             </DialogTitle>
             <DialogContent>
                 <Box border={1} sx={{m: 1, p: 2}}>

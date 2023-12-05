@@ -32,11 +32,14 @@ function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }
             [name]: value
         }));
     }
+    const isFormValid = data.username.trim() !== "" && data.email.trim() !== "";
 
     return (
         <>
             <Dialog open={props.open} onClose={props.onClose}>
-                <DialogTitle>Restore forgotten password</DialogTitle>
+                <DialogTitle>
+                    Restore forgotten password
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Please enter you username and email.
@@ -67,7 +70,7 @@ function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.onClose}>Cancel</Button>
-                    <Button onClick={handleSubmit}>Send</Button>
+                    <Button onClick={handleSubmit} disabled={!isFormValid}>Send</Button>
                 </DialogActions>
             </Dialog>
         </>

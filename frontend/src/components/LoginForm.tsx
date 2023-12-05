@@ -46,6 +46,8 @@ function LoginForm(props: LoginProps) {
         }));
     }
 
+    const isFormValid = data.username.trim() !== "" && data.password.trim() !== "";
+
     return (
         <Box
             sx={{
@@ -87,6 +89,7 @@ function LoginForm(props: LoginProps) {
                     variant="contained"
                     sx={{mt: 3, mb: 2}}
                     onClick={handleSubmit}
+                    disabled={!isFormValid}
                 >
                     Sign In
                 </Button>
