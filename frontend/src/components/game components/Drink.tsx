@@ -15,9 +15,10 @@ interface TDrinkProps {
     onDecrease: (name: string) => void,
     name: string,
     count: number,
+    drinkPrice: number,
 }
 
-function Drink({onIncrease, onDecrease, name, count}: TDrinkProps) {
+function Drink({onIncrease, onDecrease, name, count, drinkPrice}: TDrinkProps) {
     return (
         <Grid item xs={4} sx={{mb: 1}}>
             <Card sx={{width: 120, mx: "auto"}}>
@@ -34,7 +35,7 @@ function Drink({onIncrease, onDecrease, name, count}: TDrinkProps) {
                         {name[0].toUpperCase()+name.slice(1)}
                     </Typography>
                     <Typography align="center">
-                        150 coins
+                        {drinkPrice} coins
                     </Typography>
                     <Box display="flex" alignItems="center" justifyContent="center" sx={{pb: 1}}>
                         <IconButton aria-label="subtract" sx={{mr: 1}} color="error" onClick={() => onDecrease(name)}>

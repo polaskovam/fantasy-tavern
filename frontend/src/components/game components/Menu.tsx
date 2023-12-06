@@ -27,6 +27,13 @@ function Menu({onHandleMenuOpen}: MenuProps) {
         rum: 0,
     });
 
+    const prices: CountT = {
+        margarita: 150,
+        vodka: 50,
+        jaeger: 100,
+        rum: 80,
+    };
+
     const handleIncrease = (name: string) => {
         setCount((prevCount) => ({...prevCount, [name]: prevCount[name] + 1}))
     };
@@ -38,7 +45,13 @@ function Menu({onHandleMenuOpen}: MenuProps) {
     };
 
     function handleBuy() {
-        console.log(count)
+        let totalCost = 0;
+        for (const drink in count) {
+
+            totalCost += (count[drink] * prices[drink]);
+
+        }
+        console.log(totalCost)
     }
 
 
@@ -56,12 +69,13 @@ function Menu({onHandleMenuOpen}: MenuProps) {
                 <Box sx={{overflowY: 'auto', height: 488, width: '100%', justifyContent: 'center'}}>
                     <Grid container>
                         <Drink name="margarita" count={count.margarita} onIncrease={handleIncrease}
-                               onDecrease={handleDecrease}/>
+                               onDecrease={handleDecrease} drinkPrice={prices.margarita}/>
                         <Drink name="vodka" count={count.vodka} onIncrease={handleIncrease}
-                               onDecrease={handleDecrease}/>
+                               onDecrease={handleDecrease} drinkPrice={prices.vodka}/>
                         <Drink name="jaeger" count={count.jaeger} onIncrease={handleIncrease}
-                               onDecrease={handleDecrease}/>
-                        <Drink name="rum" count={count.rum} onIncrease={handleIncrease} onDecrease={handleDecrease}/>
+                               onDecrease={handleDecrease} drinkPrice={prices.jaeger}/>
+                        <Drink name="rum" count={count.rum} onIncrease={handleIncrease} onDecrease={handleDecrease}
+                               drinkPrice={prices.rum}/>
                     </Grid>
                 </Box>
             </DialogContent>

@@ -6,6 +6,7 @@ import Menu from "../components/game components/Menu";
 import Witch from "../components/game components/Witch";
 
 function GamePage() {
+    let money: number = 2050;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isWitchOpen, setIsWitchOpen] = useState(false);
 
@@ -20,7 +21,7 @@ function GamePage() {
     return (
         <Box>
             <Navbar onHandleMenuOpen={handleMenuOpen} onHandleWitchOpen={handleWitchOpen}/>
-            <Account/>
+            <Account coins={money}/>
             {isMenuOpen && <Menu onHandleMenuOpen={handleMenuOpen}/>}
             {isWitchOpen && <Witch onHandleWitchOpen={handleWitchOpen} />}
 

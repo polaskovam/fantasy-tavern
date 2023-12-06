@@ -5,12 +5,18 @@ import {ListItemText, Paper} from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from '@mui/material/ListItem';
 
-function Account() {
+interface AccountProps {
+    coins: number
+}
+
+function Account({coins}: AccountProps) {
+
+
     return (
         <Card sx={{width: 230, position: 'fixed', bottom: 10, right: 20, backgroundColor: "#f3dfc1"}}>
             <Paper style={{padding: 16,  textAlign:"center", backgroundColor:"#f6e8d3"}}>
                 <Typography variant="h4" gutterBottom>
-                    2000
+                    {coins}
                 </Typography>
                 <Typography>
                     coins
