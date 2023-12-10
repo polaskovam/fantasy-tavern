@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from "@mui/material/Link";
 import ForgottenPassword from "../components/ForgottenPassword";
+import { useNavigate } from "react-router-dom";
 
 
 interface DataT {
@@ -18,9 +19,9 @@ interface LoginProps {
     onRegistrationClick: () => void;
 }
 function LoginForm(props: LoginProps) {
-
     const [open, setOpen] = useState(false);
     const [data, setData] = useState<DataT>({username: "", password: ""});
+    const navigate = useNavigate();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -33,7 +34,26 @@ function LoginForm(props: LoginProps) {
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         console.log(data);
-        setData({username: "", password: ""})
+
+        fetch("/login", {
+            method: 'POST',
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                if(!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                return response.json();
+            })
+            .then(json => {
+                console.log(json);
+                // TODO: save user data to context
+                navigate("/game");
+            })
+            .catch(error => {
+                window.alert(error);
+            });
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +118,7 @@ function LoginForm(props: LoginProps) {
                         <Link onClick={handleClickOpen} variant="body2" underline="hover" sx={{cursor: "pointer"}}>
                             Forgot password?
                         </Link>
-                        <ForgottenPassword open={open} onClose={handleClose}/>
+                        {open && <ForgottenPassword open={open} onClose={handleClose}/>}
                     </Grid>
                     <Grid item>
                         <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onRegistrationClick}>

@@ -50,14 +50,9 @@ const buttons = [
 
 
 function RegistrationForm(props: RegistrationProps) {
-    // State
-
     const [selectedRace, setSelectedRace] = useState<string | null>("human");
-
     const [selectedRole, setSelectedRole] = useState<string>("drunk");
-
     const [isFirstVisible, setIsFirstVisible] = useState(true);
-
     const [regData, setRegData] = useState<RegDataT>({
         username: "",
         password: "",
@@ -78,7 +73,6 @@ function RegistrationForm(props: RegistrationProps) {
     function nextPart() {
         setIsFirstVisible(prevState => !prevState)
     }
-
 
     // Rest of a form
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -106,7 +100,7 @@ function RegistrationForm(props: RegistrationProps) {
         }));
     }
 
-    function handleRegData(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
 
         const formData = {
@@ -115,18 +109,21 @@ function RegistrationForm(props: RegistrationProps) {
             selectedRole
         }
 
-        console.log(formData);
+        fetch("/register", {
+            method: 'POST',
+            body: JSON.stringify(formData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-        setRegData(({
-            username: "",
-            password: "",
-            passwordCheck: "",
-            email: "",
-            age: 0,
-        }));
-
-        setSelectedRace("human");
-        setSelectedRole("drunk");
+                window.alert("Registration successful! You can now sign in.")
+                props.onLoginClick();
+            })
+            .catch(error => {
+                window.alert(error);
+            });
     }
 
     const checkPassword = regData.password === regData.passwordCheck;
@@ -189,7 +186,7 @@ function RegistrationForm(props: RegistrationProps) {
                             margin="normal"
                             required
                             fullWidth
-                            error={!isEmailValid  && regData.email !== ''}
+                            error={!isEmailValid && regData.email !== ''}
                             helperText={!isEmailValid && regData.email !== '' ? "Invalid email format!" : ""}
                             name="email"
                             label="Email address"
@@ -260,7 +257,7 @@ function RegistrationForm(props: RegistrationProps) {
                             fullWidth
                             variant="contained"
                             sx={{mt: 3, mb: 2}}
-                            onClick={handleRegData}
+                            onClick={handleSubmit}
                         >
                             Sign Up
                         </Button>

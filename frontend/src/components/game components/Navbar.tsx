@@ -5,15 +5,35 @@ import Container from "@mui/material/Container";
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 import Sidebar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
+
 interface NavProps {
     onHandleMenuOpen: () => void,
     onHandleWitchOpen: () => void,
 }
 
 function Navbar({onHandleMenuOpen, onHandleWitchOpen}: NavProps) {
+    const navigate = useNavigate();
+
+    function handleLogOut() {
+        fetch("/logout", {
+            method: 'POST',
+        })
+            .then(response => {
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                navigate("/");
+            })
+            .catch(error => {
+                window.alert(error);
+            });
+    }
+
     return (
         <>
-            <AppBar position="fixed" sx={{backgroundColor: 'black',  zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <AppBar position="fixed" sx={{backgroundColor: 'black', zIndex: (theme) => theme.zIndex.drawer + 1}}>
                 <Box ml={5} mr={5}>
                     <Toolbar>
                         <Typography variant="h4" sx={{flexGrow: 1}}>
@@ -22,7 +42,7 @@ function Navbar({onHandleMenuOpen, onHandleWitchOpen}: NavProps) {
                         <Typography variant="h6" sx={{flexGrow: 1.3, justifyContent: 'center'}}>
                             {/*(name of current room)*/}
                         </Typography>
-                        <Button color="inherit">Log out</Button>
+                        <Button color="inherit" onClick={handleLogOut}>Log out</Button>
                     </Toolbar>
                 </Box>
             </AppBar>

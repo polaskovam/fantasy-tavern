@@ -13,14 +13,26 @@ interface DataT {
 }
 
 function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }) {
-
     const [data, setData] = useState<DataT>({username: "", email: ""});
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        console.log(data);
-        setData({username: "", email: ""});
-        props.onClose();
+
+        fetch("/forgotten-password", {
+            method: "POST",
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                window.alert("New password has been sent to your e-mail.")
+                props.onClose();
+            })
+            .catch(error => {
+                window.alert(error);
+            });
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
