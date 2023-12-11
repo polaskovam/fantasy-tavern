@@ -53,7 +53,7 @@ function Introduction(props: IntroductionProps): ReactElement {
                             <Button size="large" variant="text" onClick={props.onRegistrationClick}>Don't have an account? Sign Up</Button>
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <Button size="large" variant="text">Visit without registration</Button>
+                            <Button size="large" variant="text" disabled >Visit without registration</Button>
                         </Grid>
                     </Grid>
                 </Box>
