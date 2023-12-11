@@ -4,13 +4,12 @@ import cz.tsuki.backend.models.Race;
 import cz.tsuki.backend.security.models.Drunk;
 import cz.tsuki.backend.security.models.Role;
 import cz.tsuki.backend.security.repositories.UserRepository;
-import cz.tsuki.backend.security.services.UserService;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -22,37 +21,31 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional
 class BackendApplicationTests {
-
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
+    @MockBean
     private UserRepository userRepository;
-
-    @Autowired
-    private UserService userService;
 
     @BeforeEach
     void setUp() {
 
     }
 
-
     @Test
-    void userIsDrunk() throws Exception{
+    void userIsDrunk() throws Exception {
         Long drunkId = 1L;
         Drunk drunk1 = new Drunk(drunkId, "Nathanos", "marris", 1000, Role.DRUNK, Race.UNDEAD, true);
 
-        when(userService.getUserById(drunkId)).thenReturn(Optional.of(drunk1));
+        when(userRepository.findById(drunkId)).thenReturn(Optional.of(drunk1));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.drunkId").value(drunk1.getId()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(drunk1.getUsername()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.isAdult").value(drunk1.canBuyBooze()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.adult").value(drunk1.canBuyBooze()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.wallet").value(drunk1.getWallet()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.orders").isArray());
 
