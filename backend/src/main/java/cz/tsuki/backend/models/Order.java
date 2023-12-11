@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Order {
     private User user;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderItem> items;
+    private List<OrderItem> items = new ArrayList<>();
     private int totalPrice;
 
     public Order(User user, List<OrderItem> items) {

@@ -16,13 +16,12 @@ public class DrunkWithOrdersDTO {
     private Race race;
     private int wallet;
     private List<Order> orders;
-    private UserService userService;
 
     public DrunkWithOrdersDTO(User user) {
         this.drunkId = user.getId();
         this.username = user.getUsername();
         this.isAdult = user.canBuyBooze();
         this.wallet = user.getWallet();
-        this.orders = userService.getOrders(user);
+        this.orders = user.getOrders();
     }
 }
