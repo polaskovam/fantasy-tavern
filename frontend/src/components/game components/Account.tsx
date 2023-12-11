@@ -4,19 +4,20 @@ import Typography from '@mui/material/Typography';
 import {ListItemText, Paper} from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from '@mui/material/ListItem';
+import { useUserContext} from "../../pages/UserContext";
 
-interface AccountProps {
-    coins: number
-}
 
-function Account({coins}: AccountProps) {
-
+function Account() {
+const {user} = useUserContext();
+    if (!user) {
+        throw new Error("Account Balance: Not available");
+    }
 
     return (
         <Card sx={{width: 230, position: 'fixed', bottom: 10, right: 20, backgroundColor: "#f3dfc1"}}>
             <Paper style={{padding: 16,  textAlign:"center", backgroundColor:"#f6e8d3"}}>
                 <Typography variant="h4" gutterBottom>
-                    {coins}
+                    {user.accountBalance}
                 </Typography>
                 <Typography>
                     coins

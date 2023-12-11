@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Link from "@mui/material/Link";
 import ForgottenPassword from "../components/ForgottenPassword";
 import { useNavigate } from "react-router-dom";
+import { useUserContext} from "../pages/UserContext";
 
 
 interface DataT {
@@ -48,7 +49,10 @@ function LoginForm(props: LoginProps) {
             })
             .then(json => {
                 console.log(json);
-                // TODO: save user data to context
+                // React context
+                const {setUser} = useUserContext();
+                setUser(json);
+
                 navigate("/game");
             })
             .catch(error => {

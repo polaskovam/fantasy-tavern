@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Drink from "./Drink";
-import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -10,6 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@mui/material/IconButton";
+import {useUserContext} from "../../pages/UserContext";
 
 interface CountT {
     [name: string]: number,
@@ -26,6 +26,7 @@ function Menu({onHandleMenuOpen}: MenuProps) {
         jaeger: 0,
         rum: 0,
     });
+    const [totalCost, setTotalCost] = useState<number>(0);
 
     const prices: CountT = {
         margarita: 150,
@@ -35,25 +36,28 @@ function Menu({onHandleMenuOpen}: MenuProps) {
     };
 
     const handleIncrease = (name: string) => {
-        setCount((prevCount) => ({...prevCount, [name]: prevCount[name] + 1}))
+        setCount((prevCount) => ({...prevCount, [name]: prevCount[name] + 1}));
+        setTotalCost((prevTotal) => prevTotal + prices[name]);
     };
 
     const handleDecrease = (name: string) => {
         setCount((prevCount) => ({
             ...prevCount, [name]: prevCount[name] === 0 ? 0 : prevCount[name] - 1
-        }))
+        }));
+        setTotalCost((prevTotal) => prevTotal - prices[name]);
     };
 
-    function handleBuy() {
-        let totalCost = 0;
-        for (const drink in count) {
-
-            totalCost += (count[drink] * prices[drink]);
-
-        }
-        console.log(totalCost)
+    const {user, setUser} = useUserContext();
+    if (!user) {
+        throw new Error("Account Balance: Not available");
     }
 
+    function handleSubmit() {
+        setUser((prevValue) => ({...prevValue, accountBalance: prevValue.accountBalance - totalCost}));
+        onHandleMenuOpen();
+    }
+
+    const isValidPurchase = totalCost < user.accountBalance;
 
     return (
         <Dialog open>
@@ -80,7 +84,8 @@ function Menu({onHandleMenuOpen}: MenuProps) {
                 </Box>
             </DialogContent>
             <DialogActions sx={{justifyContent: "center"}}>
-                <Button type="submit" variant="contained" size="large" onClick={handleBuy}>
+                <Button type="submit" variant="contained" size="large" disabled={!isValidPurchase}
+                        onClick={handleSubmit}>
                     Buy
                 </Button>
             </DialogActions>
