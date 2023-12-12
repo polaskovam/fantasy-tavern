@@ -26,7 +26,6 @@ function Menu({onHandleMenuOpen}: MenuProps) {
         jaeger: 0,
         rum: 0,
     });
-    const [totalCost, setTotalCost] = useState<number>(0);
 
     const prices: CountT = {
         margarita: 150,
@@ -35,16 +34,25 @@ function Menu({onHandleMenuOpen}: MenuProps) {
         rum: 80,
     };
 
+    const getTotalCost = () =>  {
+        let total = 0;
+
+        for (const drink in count) {
+            total += count[drink] * prices[drink];
+        }
+        return total;
+    };
+
     const handleIncrease = (name: string) => {
         setCount((prevCount) => ({...prevCount, [name]: prevCount[name] + 1}));
-        setTotalCost((prevTotal) => prevTotal + prices[name]);
+
     };
 
     const handleDecrease = (name: string) => {
         setCount((prevCount) => ({
             ...prevCount, [name]: prevCount[name] === 0 ? 0 : prevCount[name] - 1
         }));
-        setTotalCost((prevTotal) => prevTotal - prices[name]);
+
     };
 
     const {user, setUser} = useUserContext();
@@ -53,11 +61,11 @@ function Menu({onHandleMenuOpen}: MenuProps) {
     }
 
     function handleSubmit() {
-        setUser((prevValue) => ({...prevValue, accountBalance: prevValue.accountBalance - totalCost}));
+        setUser((prevValue) => ({...prevValue, accountBalance: prevValue.accountBalance - getTotalCost()}));
         onHandleMenuOpen();
     }
 
-    const isValidPurchase = totalCost < user.accountBalance;
+    const isValidPurchase = getTotalCost() <= user.accountBalance;
 
     return (
         <Dialog open>
