@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import Navbar from "../components/game components/Navbar";
+import Navbar from "./Navbar";
 import Box from "@mui/material/Box";
-import Account from "../components/game components/Account";
-import Menu from "../components/game components/Menu";
-import Witch from "../components/game components/Witch";
-import {UserContextProvider} from "./UserContext";
+import AccountBalance from "./AccountBalance";
+import ModalDrinkMenu from "./modals/ModalDrinkMenu";
+import ModalWitch from "./modals/ModalWitch";
+import {UserContextProvider} from "../context/UserContext";
 
 function GamePage() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,9 +22,9 @@ function GamePage() {
         <UserContextProvider>
             <Box>
                 <Navbar onHandleMenuOpen={handleMenuOpen} onHandleWitchOpen={handleWitchOpen}/>
-                <Account />
-                {isMenuOpen && <Menu onHandleMenuOpen={handleMenuOpen}/>}
-                {isWitchOpen && <Witch onHandleWitchOpen={handleWitchOpen}/>}
+                <AccountBalance />
+                {isMenuOpen && <ModalDrinkMenu onHandleMenuOpen={handleMenuOpen}/>}
+                {isWitchOpen && <ModalWitch onHandleWitchOpen={handleWitchOpen}/>}
             </Box>
         </UserContextProvider>
     )

@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import MainPage from "./pages/MainPage";
-import GamePage from "./pages/GamePage";
+import MainPage from "./components/main-page/MainPage";
+import GamePage from "./components/game-page/GamePage";
 
 function App() {
     return (

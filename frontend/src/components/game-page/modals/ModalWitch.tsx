@@ -17,7 +17,7 @@ interface WitchProps {
     onHandleWitchOpen: () => void
 }
 
-function Witch({onHandleWitchOpen}: WitchProps) {
+function ModalWitch({onHandleWitchOpen}: WitchProps) {
     return (
         <Dialog open>
             <DialogActions sx={{p: 0}}>
@@ -52,4 +52,4 @@ function Witch({onHandleWitchOpen}: WitchProps) {
     )
 }
 
-export default Witch;
+export default ModalWitch;

@@ -18,7 +18,7 @@ interface SideBarProps {
     onHandleWitchOpen: () => void,
 };
 
-function Sidebar({onHandleMenuOpen, onHandleWitchOpen}: SideBarProps) {
+function NavbarSidebar({onHandleMenuOpen, onHandleWitchOpen}: SideBarProps) {
     return (
         <Drawer
             variant="permanent"
@@ -63,4 +63,4 @@ function Sidebar({onHandleMenuOpen, onHandleWitchOpen}: SideBarProps) {
     )
 }
 
-export default Sidebar;
+export default NavbarSidebar;

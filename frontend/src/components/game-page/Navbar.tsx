@@ -4,7 +4,7 @@ import {AppBar, Toolbar} from "@mui/material";
 import Container from "@mui/material/Container";
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
-import Sidebar from "./Sidebar";
+import NavbarSidebar from "./NavbarSidebar";
 import { useNavigate } from "react-router-dom";
 
 interface NavProps {
@@ -46,7 +46,7 @@ function Navbar({onHandleMenuOpen, onHandleWitchOpen}: NavProps) {
                     </Toolbar>
                 </Box>
             </AppBar>
-            <Sidebar onHandleMenuOpen={onHandleMenuOpen} onHandleWitchOpen={onHandleWitchOpen}/>
+            <NavbarSidebar onHandleMenuOpen={onHandleMenuOpen} onHandleWitchOpen={onHandleWitchOpen}/>
         </>
     )
 }

@@ -1,10 +1,10 @@
 import React, {ReactElement, useState} from "react";
 import Container from "@mui/material/Container";
-import Introduction from "../components/Introduction";
+import Introduction from "./Introduction";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import LoginForm from "../components/LoginForm";
-import RegistrationForm from "../components/RegistrationForm";
+import LoginForm from "./forms/LoginForm";
+import RegistrationForm from "./forms/RegistrationForm";
 
 
 function MainPage(): ReactElement {

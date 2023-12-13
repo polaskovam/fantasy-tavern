@@ -9,7 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@mui/material/IconButton";
-import {useUserContext} from "../../pages/UserContext";
+import {useUserContext} from "../../context/UserContext";
 
 interface CountT {
     [name: string]: number,
@@ -19,7 +19,7 @@ interface MenuProps {
     onHandleMenuOpen: () => void,
 }
 
-function Menu({onHandleMenuOpen}: MenuProps) {
+function ModalDrinkMenu({onHandleMenuOpen}: MenuProps) {
     const [count, setCount] = useState<CountT>({
         margarita: 0,
         vodka: 0,
@@ -57,7 +57,7 @@ function Menu({onHandleMenuOpen}: MenuProps) {
 
     const {user, setUser} = useUserContext();
     if (!user) {
-        throw new Error("Account Balance: Not available");
+        throw new Error("AccountBalance Balance: Not available");
     }
 
     function handleSubmit() {
@@ -101,4 +101,4 @@ function Menu({onHandleMenuOpen}: MenuProps) {
     )
 }
 
-export default Menu;
+export default ModalDrinkMenu;

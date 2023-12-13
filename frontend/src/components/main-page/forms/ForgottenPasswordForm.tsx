@@ -12,7 +12,7 @@ interface DataT {
     email: string;
 }
 
-function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }) {
+function ForgottenPasswordForm(props: { open: boolean; onClose: (e?: any) => void; }) {
     const [data, setData] = useState<DataT>({username: "", email: ""});
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -89,4 +89,4 @@ function ForgottenPassword(props: { open: boolean; onClose: (e?: any) => void; }
     );
 }
 
-export default ForgottenPassword;
+export default ForgottenPasswordForm;

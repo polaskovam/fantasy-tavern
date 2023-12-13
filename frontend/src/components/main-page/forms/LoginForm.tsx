@@ -5,9 +5,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from "@mui/material/Link";
-import ForgottenPassword from "../components/ForgottenPassword";
+import ForgottenPasswordForm from "./ForgottenPasswordForm";
 import { useNavigate } from "react-router-dom";
-import { useUserContext} from "../pages/UserContext";
+import { useUserContext} from "../../context/UserContext";
 
 
 interface DataT {
@@ -53,7 +53,7 @@ function LoginForm(props: LoginProps) {
                 const {setUser} = useUserContext();
                 setUser(json);
 
-                navigate("/game");
+                navigate("/game-page");
             })
             .catch(error => {
                 window.alert(error);
@@ -122,7 +122,7 @@ function LoginForm(props: LoginProps) {
                         <Link onClick={handleClickOpen} variant="body2" underline="hover" sx={{cursor: "pointer"}}>
                             Forgot password?
                         </Link>
-                        {open && <ForgottenPassword open={open} onClose={handleClose}/>}
+                        {open && <ForgottenPasswordForm open={open} onClose={handleClose}/>}
                     </Grid>
                     <Grid item>
                         <Link variant="body2" underline="hover" sx={{cursor: "pointer"}} onClick={props.onRegistrationClick}>

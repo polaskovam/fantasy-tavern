@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography';
 import {ListItemText, Paper} from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from '@mui/material/ListItem';
-import { useUserContext} from "../../pages/UserContext";
+import { useUserContext} from "../context/UserContext";
 
 
-function Account() {
+function AccountBalance() {
 const {user} = useUserContext();
     if (!user) {
         throw new Error("Account Balance: Not available");
@@ -62,4 +62,4 @@ const {user} = useUserContext();
     )
 }
 
-export default Account;
+export default AccountBalance;
