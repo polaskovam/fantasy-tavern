@@ -20,6 +20,9 @@ function ForgottenPasswordForm(props: { open: boolean; onClose: (e?: any) => voi
 
         fetch("/forgotten-password", {
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(data),
         })
             .then(response => {
@@ -44,7 +47,10 @@ function ForgottenPasswordForm(props: { open: boolean; onClose: (e?: any) => voi
             [name]: value
         }));
     }
-    const isFormValid = data.username.trim() !== "" && data.email.trim() !== "";
+
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+    const isFormValid = data.username.trim() !== "" && data.email.trim() !== "" && data.email !== '' && isEmailValid;
+
 
     return (
         <>
@@ -76,6 +82,8 @@ function ForgottenPasswordForm(props: { open: boolean; onClose: (e?: any) => voi
                         fullWidth
                         name="email"
                         variant="outlined"
+                        error={!isEmailValid && data.email !== ''}
+                        helperText={!isEmailValid && data.email !== '' ? "Invalid email format!" : ""}
                         onChange={handleChange}
                         value={data.email}
                     />

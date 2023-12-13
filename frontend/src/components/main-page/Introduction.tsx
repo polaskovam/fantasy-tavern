@@ -21,39 +21,33 @@ function Introduction(props: IntroductionProps): ReactElement {
                         </Typography>
                     </Box>
                     <Typography variant="body1" gutterBottom={true}>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque arcu. Nam libero
-                        tempore,
-                        cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat
-                        facere
-                        possimus, omnis voluptas assumenda est, omnis dolor repellendus. Nullam at arcu a est
-                        sollicitudin euismod. In enim a arcu imperdiet malesuada. Sed elit dui, pellentesque a,
-                        faucibus
-                        vel, interdum nec, diam. Mauris metus. Aenean placerat. Ut enim ad minim veniam, quis
-                        nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Step into a realm where the elixirs are as enchanting as the stories shared, and the ambiance is
+                        steeped in the magic of camaraderie. Our Fantasy Tavern invites you to indulge in a captivating
+                        experience, where the only quest is to savor the finest concoctions crafted with a touch of
+                        fantasy flair.
+                    </Typography>
+                    <Typography variant="body1" gutterBottom={true}>
+                        Within these hallowed walls, we specialize in elixirs that transport your taste buds to realms
+                        unknown. From potions that shimmer in iridescent hues to brews that carry the essence of
+                        mythical landscapes, every drink is a sip into the extraordinary. Whether you seek the bold
+                        strength of a Dragon's Roar or the subtle elegance of a Faery's Nectar, our menu promises a
+                        journey through the realms of flavor.
                     </Typography>
                     <Typography variant="body1">
-                        Integer in sapien. Etiam
-                        ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Nullam rhoncus aliquam
-                        metus.
-                        Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Duis risus. In sem justo,
-                        commodo ut, suscipit at, pharetra vitae, orci. Nam quis nulla. Aenean fermentum risus id
-                        tortor.
-                        Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
-                        quod
-                        maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-                        Maecenas
-                        aliquet accumsan leo.
+                        So, join us in raising your enchanted goblets high, as we toast to the magic of good company and
+                        extraordinary elixirs. The Fantasy Tavern is more than a place to drink! It's a
+                        celebration of the fantastical, one sip at a time.
                     </Typography>
                     <Grid container mt={5} textAlign="center" justifyContent="center">
                         <Grid item xs={12} md={4}>
                             <Button size="large" variant="text" onClick={props.onLoginClick}>Sign In</Button>
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <Button size="large" variant="text" onClick={props.onRegistrationClick}>Don't have an account? Sign Up</Button>
+                            <Button size="large" variant="text" onClick={props.onRegistrationClick}>Don't have an
+                                account? Sign Up</Button>
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <Button size="large" variant="text" disabled >Visit without registration</Button>
+                            <Button size="large" variant="text" disabled>Visit without registration</Button>
                         </Grid>
                     </Grid>
                 </Box>

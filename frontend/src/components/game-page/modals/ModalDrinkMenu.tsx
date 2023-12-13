@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Drink from "./Drink";
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
@@ -11,30 +11,33 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@mui/material/IconButton";
 import {useUserContext} from "../../context/UserContext";
 
-interface CountT {
+interface NumRecord {
     [name: string]: number,
 }
 
 interface MenuProps {
     onHandleMenuOpen: () => void,
+    drinks: Record<string, string | number>[],
 }
 
-function ModalDrinkMenu({onHandleMenuOpen}: MenuProps) {
-    const [count, setCount] = useState<CountT>({
-        margarita: 0,
-        vodka: 0,
-        jaeger: 0,
-        rum: 0,
-    });
+function ModalDrinkMenu({onHandleMenuOpen, drinks}: MenuProps) {
+    const [count, setCount] = useState<NumRecord>({});
+    const [prices, setPrices] = useState<NumRecord>({});
 
-    const prices: CountT = {
-        margarita: 150,
-        vodka: 50,
-        jaeger: 100,
-        rum: 80,
-    };
+    useEffect(() => {
+        const countObj: NumRecord = {};
+        const pricesObj: NumRecord = {};
 
-    const getTotalCost = () =>  {
+        for (const item of drinks) {
+            countObj[item.name] = 0;
+            pricesObj[item.name] = Number(item.price);
+        }
+
+        setCount(countObj);
+        setPrices(pricesObj);
+    }, [])
+
+    const getTotalCost = () => {
         let total = 0;
 
         for (const drink in count) {
@@ -80,14 +83,18 @@ function ModalDrinkMenu({onHandleMenuOpen}: MenuProps) {
             <DialogContent>
                 <Box sx={{overflowY: 'auto', height: 488, width: '100%', justifyContent: 'center'}}>
                     <Grid container>
-                        <Drink name="margarita" count={count.margarita} onIncrease={handleIncrease}
-                               onDecrease={handleDecrease} drinkPrice={prices.margarita}/>
-                        <Drink name="vodka" count={count.vodka} onIncrease={handleIncrease}
-                               onDecrease={handleDecrease} drinkPrice={prices.vodka}/>
-                        <Drink name="jaeger" count={count.jaeger} onIncrease={handleIncrease}
-                               onDecrease={handleDecrease} drinkPrice={prices.jaeger}/>
-                        <Drink name="rum" count={count.rum} onIncrease={handleIncrease} onDecrease={handleDecrease}
-                               drinkPrice={prices.rum}/>
+                        {Object.keys(count).map((drinkName) => (
+                                <Drink
+                                    key={drinkName}
+                                    onIncrease={handleIncrease}
+                                    onDecrease={handleDecrease}
+                                    name={drinkName}
+                                    count={count[drinkName]}
+                                    drinkPrice={prices[drinkName]}
+                                />
+                            )
+                        )}
+
                     </Grid>
                 </Box>
             </DialogContent>

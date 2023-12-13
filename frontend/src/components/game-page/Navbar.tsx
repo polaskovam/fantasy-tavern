@@ -18,6 +18,10 @@ function Navbar({onHandleMenuOpen, onHandleWitchOpen}: NavProps) {
     function handleLogOut() {
         fetch("/logout", {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: "{}",
         })
             .then(response => {
                 console.log(response);
