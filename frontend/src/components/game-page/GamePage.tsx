@@ -67,7 +67,10 @@ function GamePage() {
 
     return (
         <UserContextProvider>
-            <Box>
+            <Box width={1} component="div"
+                 display="flex"
+                 height="100vh"
+                 sx={{backgroundImage: `url("/images/game-background2.png")`}}>
                 <Navbar onHandleMenuOpen={handleMenuOpen} onHandleWitchOpen={handleWitchOpen}/>
                 <AccountBalance/>
                 {isMenuOpen && <ModalDrinkMenu drinks={drinks} onHandleMenuOpen={handleMenuOpen}/>}

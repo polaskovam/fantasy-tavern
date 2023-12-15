@@ -72,6 +72,7 @@ function ModalDrinkMenu({onHandleMenuOpen, drinks}: MenuProps) {
 
     return (
         <Dialog open>
+            <Box sx={{backgroundImage: `url("/images/old-paper.jpg")`, backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
             <DialogActions sx={{p: 0}}>
                 <IconButton onClick={onHandleMenuOpen}>
                     <CloseIcon/>
@@ -104,6 +105,7 @@ function ModalDrinkMenu({onHandleMenuOpen, drinks}: MenuProps) {
                     Buy
                 </Button>
             </DialogActions>
+            </Box>
         </Dialog>
     )
 }

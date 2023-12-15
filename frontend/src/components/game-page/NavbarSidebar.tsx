@@ -29,7 +29,7 @@ function NavbarSidebar({onHandleMenuOpen, onHandleWitchOpen}: SideBarProps) {
             }}
             PaperProps={
                 {
-                    sx: {backgroundColor: 'green'}
+                    sx: {backgroundColor: 'black'}
                 }
             }
         >

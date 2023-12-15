@@ -12,9 +12,9 @@ interface IntroductionProps {
 
 function Introduction(props: IntroductionProps): ReactElement {
     return (
-        <Grid item xs={12} mt={5}>
+        <Grid item xs={12} mt={3} mr={8} ml={8} >
             <Paper elevation={24}>
-                <Box p={9} pt={4} pb={2}>
+                <Box p={6} pt={4} pb={2}>
                     <Box pb={3}>
                         <Typography variant="h4" textAlign="center" gutterBottom={true}>
                             Welcome to our Fantasy Tavern

@@ -38,11 +38,11 @@ function Drink({onIncrease, onDecrease, name, count, drinkPrice}: TDrinkProps) {
                         {drinkPrice} coins
                     </Typography>
                     <Box display="flex" alignItems="center" justifyContent="center" sx={{pb: 1}}>
-                        <IconButton aria-label="subtract" sx={{mr: 1}} color="error" onClick={() => onDecrease(name)}>
+                        <IconButton aria-label="subtract" sx={{mr: 1}} onClick={() => onDecrease(name)}>
                             <RemoveIcon />
                         </IconButton>
                         <Typography variant="h6">{count}</Typography>
-                        <IconButton aria-label="add" sx={{ml: 1}} color="success" onClick={() => onIncrease(name)}>
+                        <IconButton aria-label="add" sx={{ml: 1}} onClick={() => onIncrease(name)}>
                             <AddIcon />
                         </IconButton>
                     </Box>
