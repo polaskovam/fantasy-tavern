@@ -1,5 +1,9 @@
 package cz.tsuki.backend.security.services;
 
+import cz.tsuki.backend.security.dto.LoginCredentials;
+import cz.tsuki.backend.security.dto.RegisterRequest;
+import cz.tsuki.backend.security.dto.RegisterRequestBartender;
+import cz.tsuki.backend.security.models.Bartender;
 import cz.tsuki.backend.security.models.Drunk;
 import cz.tsuki.backend.security.models.User;
 import cz.tsuki.backend.security.repositories.UserRepository;
@@ -22,4 +26,16 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public void register(RegisterRequest registerRequest) {
+        Drunk drunk = new Drunk(registerRequest);
+        userRepository.save(drunk);
+    }
+
+    public void register(RegisterRequestBartender registerRequestB) {
+        Bartender bartender = new Bartender(registerRequestB);
+        userRepository.save(bartender);
+    }
+
+    public void login(LoginCredentials loginCredentials) {
+    }
 }

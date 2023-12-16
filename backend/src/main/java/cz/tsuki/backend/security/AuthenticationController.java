@@ -33,8 +33,13 @@ public class AuthenticationController {
 
     @PostMapping("/register-bartender")
     public ResponseEntity<?> register(@RequestBody RegisterRequestBartender registerRequestB, @Value("${secretCode}") String secretCode) {
-        userService.register(registerRequestB, secretCode);
-        return ResponseEntity.status(200).body(new SuccessMsg("User registered successfully!"));
+        if (registerRequestB.getSecretCode().equals(secretCode)) {
+            userService.register(registerRequestB);
+            return ResponseEntity.status(200).body(new SuccessMsg("User registered successfully!"));
+        } else {
+            return ResponseEntity.status(400).body(new SuccessMsg("Wrong secret code!"));
+        }
+
     }
 
     @PostMapping("/login")
