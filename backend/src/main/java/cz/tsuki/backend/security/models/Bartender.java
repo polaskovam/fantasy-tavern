@@ -1,39 +1,23 @@
 package cz.tsuki.backend.security.models;
 
+import cz.tsuki.backend.security.dto.RegisterRequestBartender;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @DiscriminatorValue("BARTENDER")
 public class Bartender extends User {
-    public Bartender() {
+    public Bartender(RegisterRequestBartender registerRequestB) {
+        super(registerRequestB);
         this.setRole(Role.BARTENDER);
     }
 
     @Override
     public boolean canBuyBooze() {
         return true;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 }

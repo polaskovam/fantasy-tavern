@@ -2,7 +2,18 @@ package cz.tsuki.backend.security.models;
 
 import cz.tsuki.backend.models.Order;
 import cz.tsuki.backend.models.Race;
-import jakarta.persistence.*;
+import cz.tsuki.backend.security.dto.RegisterRequest;
+import cz.tsuki.backend.security.dto.RegisterRequestBartender;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,6 +58,22 @@ public abstract class User implements UserDetails {
         this.race = race;
     }
 
+    public User(RegisterRequest registerRequest) {
+        this.username = registerRequest.getUsername();
+        this.password = registerRequest.getPassword();
+        this.email = registerRequest.getEmail();
+        this.wallet = registerRequest.getWallet();
+        this.race = registerRequest.getRace();
+    }
+
+    public User(RegisterRequestBartender registerRequestB) {
+        this.username = registerRequestB.getUsername();
+        this.password = registerRequestB.getPassword();
+        this.email = registerRequestB.getEmail();
+        this.wallet = registerRequestB.getWallet();
+        this.race = registerRequestB.getRace();
+    }
+
     //orders
     //wallet - which currency? one currency or golds, silver, copper coins?
 
@@ -60,4 +87,25 @@ public abstract class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
