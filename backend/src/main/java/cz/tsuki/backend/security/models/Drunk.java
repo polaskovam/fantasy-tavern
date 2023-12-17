@@ -4,11 +4,9 @@ import cz.tsuki.backend.models.Race;
 import cz.tsuki.backend.security.dto.RegisterRequest;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @DiscriminatorValue("DRUNK")
 public class Drunk extends User {
