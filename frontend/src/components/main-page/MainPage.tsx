@@ -18,10 +18,11 @@ function MainPage(): ReactElement {
         <Box width={1} sx={{backgroundImage: `url("images/main-background1.png")`}}
              component="div"
              display="flex"
+             alignItems="center"
              justifyContent="center"
              height="100vh">
             <Container component="main" maxWidth="md" sx={{backgroundColor: 'rgba(0, 0, 0, 0)'}}>
-                <Grid container justifyContent="center" mt={17}>
+                <Grid container direction="column" justifyContent="center" alignItems="center">
                     {activeComponent === "introduction" && (
                         <Introduction
                             onLoginClick={() => handleComponentChange('login')}

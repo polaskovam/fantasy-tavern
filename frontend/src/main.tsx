@@ -6,9 +6,8 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(<App/>);
 
-//
+
 // const BACKEND = "http://tavern.tsuki.cz/api";
-// //const BACKEND = "http://localhost:8080/api";
 // fetch(BACKEND + "/hello")
 //     .then(req => req.json())
 //     .then(arr => {

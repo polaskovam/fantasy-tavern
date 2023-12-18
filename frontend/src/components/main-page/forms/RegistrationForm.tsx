@@ -16,6 +16,11 @@ interface RegDataT {
     age: number,
 }
 
+interface SubmitObj extends RegDataT {
+    race: string,
+    secretCode?: string,
+}
+
 interface RegistrationProps {
     onReturn: () => void;
     onLoginClick: () => void;
@@ -51,9 +56,10 @@ const buttons = [
 
 
 function RegistrationForm(props: RegistrationProps) {
-    const [selectedRace, setSelectedRace] = useState<string | null>("human");
+    const [selectedRace, setSelectedRace] = useState<string>("human");
     const [selectedRole, setSelectedRole] = useState<string>("user");
     const [isFirstVisible, setIsFirstVisible] = useState(true);
+    const [secretCode, setSecretCode] = useState<string>("");
     const [regData, setRegData] = useState<RegDataT>({
         username: "",
         password: "",
@@ -63,11 +69,14 @@ function RegistrationForm(props: RegistrationProps) {
     });
 
     //Functions
-    const handleSelect = (name: string, type?: string) => {
+    const handleSelect = (value: string, type?: string) => {
         if (type === 'race') {
-            setSelectedRace(name);
+            setSelectedRace(value);
         } else {
-            setSelectedRole(name);
+            setSelectedRole(value);
+            if(value === "user") {
+                setSecretCode("");
+            }
         }
     }
 
@@ -101,13 +110,20 @@ function RegistrationForm(props: RegistrationProps) {
         }));
     }
 
+    function handleChangeCode(e: React.ChangeEvent<HTMLInputElement>) {
+        e.preventDefault();
+        setSecretCode(e.target.value);
+    }
+
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
 
-        const formData = {
+        const formData: SubmitObj = {
             ...regData,
-            selectedRace,
-            selectedRole
+            race: selectedRace,
+        }
+        if(selectedRole === "bartender") {
+            formData.secretCode = secretCode;
         }
 
         fetch(`http://tavern.tsuki.cz/auth/register-${selectedRole}`, {
@@ -249,6 +265,19 @@ function RegistrationForm(props: RegistrationProps) {
                                 handleClick={() => handleSelect("bartender")}
                                 isSelected={selectedRole === "bartender"}
                             />
+                            <Box width={1} sx={{mr: 5, ml: 5}}>
+                                {selectedRole === "bartender" && <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name=" secret password"
+                                    label="Enter secret password"
+                                    type="password"
+                                    id="secretPassword"
+                                    value={secretCode}
+                                    onChange={handleChangeCode}
+                                />}
+                            </Box>
                             <Grid item xs={12} pb={1} pt={1} mt={3}>
                                 <Typography>
                                     My character's race will be:
