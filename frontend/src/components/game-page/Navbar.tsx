@@ -16,7 +16,7 @@ function Navbar({onHandleMenuOpen, onHandleWitchOpen}: NavProps) {
     const navigate = useNavigate();
 
     function handleLogOut() {
-        fetch("/logout", {
+        fetch("http://tavern.tsuki.cz/auth/logout", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

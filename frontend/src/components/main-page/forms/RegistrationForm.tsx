@@ -52,7 +52,7 @@ const buttons = [
 
 function RegistrationForm(props: RegistrationProps) {
     const [selectedRace, setSelectedRace] = useState<string | null>("human");
-    const [selectedRole, setSelectedRole] = useState<string>("drunk");
+    const [selectedRole, setSelectedRole] = useState<string>("user");
     const [isFirstVisible, setIsFirstVisible] = useState(true);
     const [regData, setRegData] = useState<RegDataT>({
         username: "",
@@ -110,7 +110,7 @@ function RegistrationForm(props: RegistrationProps) {
             selectedRole
         }
 
-        fetch("/register", {
+        fetch(`http://tavern.tsuki.cz/auth/register-${selectedRole}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -240,15 +240,15 @@ function RegistrationForm(props: RegistrationProps) {
                             <AvatarButton
                                 name="drunk"
                                 src="/images/drunk.png"
-                                handleClick={() => handleSelect("drunk")}
-                                isSelected={selectedRole === "drunk"}
+                                handleClick={() => handleSelect("user")}
+                                isSelected={selectedRole === "user"}
                             />
-                            {/*<AvatarButton*/}
-                            {/*    name="bartender"*/}
-                            {/*    src="/images/bartender.png"*/}
-                            {/*    handleClick={() => handleSelect("bartender")}*/}
-                            {/*    isSelected={selectedRole === "bartender"}*/}
-                            {/*/>*/}
+                            <AvatarButton
+                                name="bartender"
+                                src="/images/bartender.png"
+                                handleClick={() => handleSelect("bartender")}
+                                isSelected={selectedRole === "bartender"}
+                            />
                             <Grid item xs={12} pb={1} pt={1} mt={3}>
                                 <Typography>
                                     My character's race will be:

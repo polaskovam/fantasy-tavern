@@ -38,7 +38,7 @@ function LoginForm(props: LoginProps) {
         e.preventDefault();
         console.log(data);
 
-        fetch("/login", {
+        fetch("http://tavern.tsuki.cz/auth/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
