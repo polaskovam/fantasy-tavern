@@ -4,7 +4,8 @@ import cz.tsuki.backend.security.dto.LoginCredentials;
 import cz.tsuki.backend.security.dto.RegisterRequest;
 import cz.tsuki.backend.security.dto.RegisterRequestBartender;
 import cz.tsuki.backend.security.dto.SuccessMsg;
-import cz.tsuki.backend.security.services.UserService;
+import cz.tsuki.backend.security.services.AuthService;
+import cz.tsuki.backend.security.services.UserSecurityService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -23,18 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class AuthenticationController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register-user")
     public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
-        userService.register(registerRequest);
+        authService.register(registerRequest);
         return ResponseEntity.status(200).body(new SuccessMsg("User registered successfully!"));
     }
 
     @PostMapping("/register-bartender")
     public ResponseEntity<?> register(@RequestBody RegisterRequestBartender registerRequestB, @Value("${secretCode}") String secretCode) {
         if (registerRequestB.getSecretCode().equals(secretCode)) {
-            userService.register(registerRequestB);
+            authService.register(registerRequestB);
             return ResponseEntity.status(200).body(new SuccessMsg("User registered successfully!"));
         } else {
             return ResponseEntity.status(400).body(new SuccessMsg("Wrong secret code!"));
@@ -44,7 +45,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginCredentials loginCredentials) {
-        userService.login(loginCredentials);
+        authService.login(loginCredentials);
         return ResponseEntity.status(200).body(new SuccessMsg("User logged in successfully!"));
     }
 

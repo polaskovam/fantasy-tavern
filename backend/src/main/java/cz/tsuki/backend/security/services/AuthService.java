@@ -5,34 +5,28 @@ import cz.tsuki.backend.security.dto.RegisterRequest;
 import cz.tsuki.backend.security.dto.RegisterRequestBartender;
 import cz.tsuki.backend.security.models.Bartender;
 import cz.tsuki.backend.security.models.Drunk;
-import cz.tsuki.backend.security.models.User;
 import cz.tsuki.backend.security.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class AuthService {
+    @Autowired
     private final UserRepository userRepository;
-
-    public List<Drunk> getAllDrunks() {
-        return userRepository.findAllDrunks();
-    }
-
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
-
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     public void register(RegisterRequest registerRequest) {
         Drunk drunk = new Drunk(registerRequest);
+        drunk.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         userRepository.save(drunk);
     }
 
     public void register(RegisterRequestBartender registerRequestB) {
         Bartender bartender = new Bartender(registerRequestB);
+        bartender.setPassword(passwordEncoder.encode(registerRequestB.getPassword()));
         userRepository.save(bartender);
     }
 

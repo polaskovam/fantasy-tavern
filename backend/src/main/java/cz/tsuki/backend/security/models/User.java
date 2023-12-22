@@ -60,7 +60,6 @@ public abstract class User implements UserDetails {
 
     public User(RegisterRequest registerRequest) {
         this.username = registerRequest.getUsername();
-        this.password = registerRequest.getPassword();
         this.email = registerRequest.getEmail();
         this.wallet = registerRequest.getWallet();
         this.race = registerRequest.getRace();
@@ -68,7 +67,6 @@ public abstract class User implements UserDetails {
 
     public User(RegisterRequestBartender registerRequestB) {
         this.username = registerRequestB.getUsername();
-        this.password = registerRequestB.getPassword();
         this.email = registerRequestB.getEmail();
         this.wallet = registerRequestB.getWallet();
         this.race = registerRequestB.getRace();

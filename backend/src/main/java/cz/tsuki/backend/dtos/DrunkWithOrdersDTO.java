@@ -3,7 +3,6 @@ package cz.tsuki.backend.dtos;
 import cz.tsuki.backend.models.Order;
 import cz.tsuki.backend.models.Race;
 import cz.tsuki.backend.security.models.User;
-import cz.tsuki.backend.security.services.UserService;
 import lombok.Data;
 
 import java.util.List;
