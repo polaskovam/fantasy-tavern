@@ -9,7 +9,10 @@ import cz.tsuki.backend.security.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +37,13 @@ public class AuthService {
 
     public boolean login(LoginCredentials loginCredentials) {
         try {
-            authenticationManager.authenticate(
+          Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginCredentials.getUsername(),
                             loginCredentials.getPassword()
                     )
             );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             return true;
         } catch (AuthenticationException e) {
             return false;
