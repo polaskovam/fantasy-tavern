@@ -7,17 +7,19 @@ import cz.tsuki.backend.security.models.Bartender;
 import cz.tsuki.backend.security.models.Drunk;
 import cz.tsuki.backend.security.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class AuthService {
-    @Autowired
     private final UserRepository userRepository;
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+
     public void register(RegisterRequest registerRequest) {
         Drunk drunk = new Drunk(registerRequest);
         drunk.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
@@ -30,6 +32,17 @@ public class AuthService {
         userRepository.save(bartender);
     }
 
-    public void login(LoginCredentials loginCredentials) {
+    public boolean login(LoginCredentials loginCredentials) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginCredentials.getUsername(),
+                            loginCredentials.getPassword()
+                    )
+            );
+            return true;
+        } catch (AuthenticationException e) {
+            return false;
+        }
     }
 }

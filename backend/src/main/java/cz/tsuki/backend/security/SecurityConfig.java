@@ -4,8 +4,10 @@ import cz.tsuki.backend.security.services.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -34,22 +36,24 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+            throws Exception {
+        return config.getAuthenticationManager();
+    }
 
-        http
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(configurer ->
                         configurer
                                 .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/seed/**")).hasRole("BARTENDER")
                                 .requestMatchers(new AntPathRequestMatcher("/api/**")).hasAnyRole("BARTENDER", "DRUNK")
-                                .anyRequest().authenticated());
-
-
-        //use HTTP Basic authentication
-        // http.httpBasic(Customizer.withDefaults());
-        //cors?
-        http.csrf(AbstractHttpConfigurer::disable);
-        return http.build();
+                                .anyRequest().authenticated())
+                .build();
     }
 }

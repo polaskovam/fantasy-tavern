@@ -5,7 +5,6 @@ import cz.tsuki.backend.security.dto.RegisterRequest;
 import cz.tsuki.backend.security.dto.RegisterRequestBartender;
 import cz.tsuki.backend.security.dto.SuccessMsg;
 import cz.tsuki.backend.security.services.AuthService;
-import cz.tsuki.backend.security.services.UserSecurityService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -45,8 +44,12 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginCredentials loginCredentials) {
-        authService.login(loginCredentials);
-        return ResponseEntity.status(200).body(new SuccessMsg("User logged in successfully!"));
+        boolean success = authService.login(loginCredentials);
+        if (success) {
+            return ResponseEntity.status(200).body(new SuccessMsg("User logged in successfully!"));
+        } else {
+            return ResponseEntity.status(400).body(new SuccessMsg("Wrong credentials!"));
+        }
     }
 
     @PostMapping("/logout")
